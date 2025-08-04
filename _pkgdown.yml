@@ -1,0 +1,36 @@
+url: https://github.com/DuanLab1/SpaPheno
+template:
+  bootstrap: 5
+
+reference:
+  - title: "Example data"
+    desc: >
+      data for SpaPheno
+    contents:
+      starts_with("osmFISH")
+  - title: "Data Analysis"
+    desc: >
+      Functions for Data Analysis
+    contents:
+      - BuildPhenoModelAutoAlpha
+      - Cell_type_neighborhood
+      - compute_shap_spatial
+      - FeatureImportanceCoef
+      - generate_simulated_bulk_data
+      - GeneratePermutations
+      - PhenoAbundancePlot
+      - PhenotypeHclust
+      - PhenotypePlot
+      - Precision_Recall_macroF1
+      - SpatialKNN
+      - SpatialPhenoMap
+      - STplot
+      - ThresholdPlot
+  - title: "SHAP in interpretability"
+    desc: >
+      Functions for Interpretable Model
+    contents:
+      - SpaPheno_SHAP_dependence_plot
+      - SpaPheno_SHAP_residual_analysis
+      - SpaPheno_SHAP_summary_plot
+      - SpaPheno_SHAP_waterfall_plot

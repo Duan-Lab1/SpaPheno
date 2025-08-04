@@ -1,0 +1,41 @@
+Package: SpaPheno
+Type: Package
+Title: Spatially-Informed Phenotype Modeling
+Version: 0.0.1
+Authors@R: c(
+    person("Bin", "Duan", email = "binduan@sjtu.edu.cn", role = c("aut", "cre")),
+    person("Hua", "Zou", email = "zouhua1@outlook.com", role = c("aut"))
+  )
+Description: A package for building spatially-informed models for phenotype prediction using cell-type composition derived from spatial transcriptomics data.
+License: GPL-3 + file LICENSE
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: gzip
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.1.0)
+Imports:
+    glmnet,
+    caret,
+    FNN,
+    iml,
+    stats,
+    utils,
+    dplyr,
+    ggplot2,
+    SpaDo, 
+    reshape2,
+    tidyr,
+    gridExtra,
+    viridis
+Suggests:
+    rmarkdown,
+    knitr,
+    philentropy,
+    testthat,
+    SingleCellExperiment,
+    Matrix,
+    BiocStyle
+VignetteBuilder: knitr
+BugReports: https://github.com/DuanLab1/SpaPheno/issues
+URL: https://github.com/DuanLab1/SpaPheno
