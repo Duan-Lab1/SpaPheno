@@ -1,12 +1,22 @@
 Package: SpaPheno
 Type: Package
-Title: Spatially-Informed Phenotype Modeling
+Title: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning
 Version: 0.0.1
 Authors@R: c(
-    person("Bin", "Duan", email = "binduan@sjtu.edu.cn", role = c("aut", "cre")),
-    person("Hua", "Zou", email = "zouhua1@outlook.com", role = c("aut"))
+    person("Bin", "Duan", email = "binduan@sjtu.edu.cn", role = c("aut", "cre"))
   )
-Description: A package for building spatially-informed models for phenotype prediction using cell-type composition derived from spatial transcriptomics data.
+Description: Linking spatial transcriptomic patterns to clinical phenotypes is 
+  essential for advancing precision oncology. We introduce SpaPheno, an interpretable 
+  machine learning framework that bridges spatial transcriptomic data with clinically 
+  annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with 
+  SHAP-based interpretation to identify spatially localized features—such as 
+  cell types and tissue regions—that are predictive of patient survival, tumor stage, 
+  and immunotherapy response. Through comprehensive simulations and applications to 
+  spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), 
+  breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and 
+  broad applicability. By jointly optimizing predictive power and biological interpretability, 
+  SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a 
+  generalizable approach for spatially informed precision medicine.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true

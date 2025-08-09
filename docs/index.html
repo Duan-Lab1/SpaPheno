@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Spatially-Informed Phenotype Modeling • SpaPheno</title>
+<title>Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning • SpaPheno</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Spatially-Informed Phenotype Modeling">
-<meta name="description" content="A package for building spatially-informed models for phenotype prediction using cell-type composition derived from spatial transcriptomics data.">
-<meta property="og:description" content="A package for building spatially-informed models for phenotype prediction using cell-type composition derived from spatial transcriptomics data.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning">
+<meta name="description" content="Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.">
+<meta property="og:description" content="Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -53,12 +53,17 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="spapheno-spatially-informed-phenotype-prediction-and-interpretation-using-single-cell-data">SpaPheno: Spatially-Informed Phenotype Prediction and Interpretation Using Single-Cell Data<a class="anchor" aria-label="anchor" href="#spapheno-spatially-informed-phenotype-prediction-and-interpretation-using-single-cell-data"></a>
+<div class="page-header"><h1 id="spapheno-linking-spatial-transcriptomics-to-clinical-phenotypes-with-interpretable-machine-learning">SpaPheno: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning<a class="anchor" aria-label="anchor" href="#spapheno-linking-spatial-transcriptomics-to-clinical-phenotypes-with-interpretable-machine-learning"></a>
 </h1></div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><strong>SpaPheno</strong> is an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data.</p>
+<p><strong>SpaPheno</strong> is an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data. Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.</p>
+<div class="figure" style="text-align: center">
+<img src="./reference/figures/workflow.jpg" alt="The Overview of SpaPheno" width="80%" height="80%"><p class="caption">
+The Overview of SpaPheno
+</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="sunny-key-features">
@@ -92,6 +97,9 @@
 <span><span class="co"># ))</span></span>
 <span></span>
 <span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="co"># devtools::install_github("bm2-lab/SpaDo")</span></span>
+<span></span>
+<span><span class="co"># SpaPheno installation</span></span>
 <span><span class="co"># devtools::install_github("DuanLab1/SpaPheno", dependencies = c("Depends", "Imports", "LinkingTo"))</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DuanLab1/SpaPheno">SpaPheno</a></span><span class="op">)</span></span>
@@ -107,7 +115,7 @@
 <div class="section level3">
 <h3 id="data-availability">Data availability<a class="anchor" aria-label="anchor" href="#data-availability"></a>
 </h3>
-<p>The data required for the test are all listed in the following directory <a href="https://www.jianguoyun.com/d/home#/sandbox/1b33454/663a25cbfea24b7b/%2F/" class="external-link">SpaPheno Demo Data</a>.</p>
+<p>The data required for the test are all listed in the following google cloud directory <a href="https://drive.google.com/drive/folders/1tiSgMjhzvIsirvJwFDIAQIEIhR7qixUW?usp=drive_link" class="external-link">SpaPheno Demo Data</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>├── BRCAsurvival.RData</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>├── HCC_stage.RData</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>├── HCC_survival.RData</span>
@@ -136,7 +144,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"Simulation_osmFISH.RData"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Simulation_osmFISH.RData"</span>, package <span class="op">=</span> <span class="st">"SpaPheno"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_cellType</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -265,8 +273,7 @@
 <span class="emoji" data-emoji="writing_hand">✍️</span> Authors<a class="anchor" aria-label="anchor" href="#writing_hand-authors"></a>
 </h2>
 <ul>
-<li><p><a href="mailto:binduan@sjtu.edu.cn">Bin Duan</a></p></li>
-<li><p><a href="mailto:zouhua1@outlook.com">Hua Zou</a></p></li>
+<li><a href="mailto:binduan@sjtu.edu.cn">Bin Duan</a></li>
 </ul>
 </div>
 </div>
@@ -298,7 +305,6 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Bin Duan <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Hua Zou <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -309,7 +315,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Bin Duan, Hua Zou.</p>
+  <p>Developed by Bin Duan.</p>
 </div>
 
 <div class="pkgdown-footer-right">

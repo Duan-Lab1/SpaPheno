@@ -7,7 +7,7 @@ html_preview: false
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# SpaPheno: Spatially-Informed Phenotype Prediction and Interpretation Using Single-Cell Data
+# SpaPheno: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning
 
 ```{r, echo=FALSE, results="hide", message=FALSE}
 Biocpkg <- function (pkg) {
@@ -15,11 +15,17 @@ Biocpkg <- function (pkg) {
 }
 library(conflicted)
 conflicted::conflict_prefer("filter", "dplyr")
+
+knitr::opts_chunk$set(fig.path = "inst/figures/README-")
 ```
 
 ## Overview
 
-**SpaPheno** is an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data.
+**SpaPheno** is an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data. Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.
+
+```{r, echo=FALSE, out.width="80%", out.height="80%", dpi=600, fig.align="center", fig.cap="The Overview of SpaPheno"}
+knitr::include_graphics("./man/figures/workflow.jpg")
+```
 
 ## :sunny: Key Features
 
@@ -61,7 +67,7 @@ library(survival)
 
 ### Data availability
 
-The data required for the test are all listed in the following directory [SpaPheno Demo Data](https://www.jianguoyun.com/d/home#/sandbox/1b33454/663a25cbfea24b7b/%2F/).
+The data required for the test are all listed in the following google cloud directory [SpaPheno Demo Data](https://drive.google.com/drive/folders/1tiSgMjhzvIsirvJwFDIAQIEIhR7qixUW?usp=drive_link).
 
 ```
 ├── BRCAsurvival.RData
@@ -215,5 +221,3 @@ Kindly cite by using `citation("SpaPheno")` if you think **SpaPheno** helps you.
 ## :writing_hand: Authors
 
 + [Bin Duan](mailto:binduan@sjtu.edu.cn)
-
-+ [Hua Zou](mailto:zouhua1@outlook.com)

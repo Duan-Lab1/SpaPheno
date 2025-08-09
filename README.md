@@ -1,12 +1,36 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# SpaPheno: Spatially-Informed Phenotype Prediction and Interpretation Using Single-Cell Data
+# SpaPheno: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning
 
 ## Overview
 
 **SpaPheno** is an R package designed to identify, visualize, and
 interpret spatial phenotype associations from spatial transcriptomics
-and simulated bulk data.
+and simulated bulk data. Linking spatial transcriptomic patterns to
+clinical phenotypes is essential for advancing precision oncology. We
+introduce SpaPheno, an interpretable machine learning framework that
+bridges spatial transcriptomic data with clinically annotated bulk
+RNA-seq datasets. SpaPheno integrates Elastic Net regression with
+SHAP-based interpretation to identify spatially localized features—such
+as cell types and tissue regions—that are predictive of patient
+survival, tumor stage, and immunotherapy response. Through comprehensive
+simulations and applications to spatial datasets from primary liver
+cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA),
+and melanoma, SpaPheno demonstrates superior performance and broad
+applicability. By jointly optimizing predictive power and biological
+interpretability, SpaPheno enables the discovery of clinically
+meaningful spatial biomarkers, offering a generalizable approach for
+spatially informed precision medicine.
+
+<div class="figure" style="text-align: center">
+
+<img src="./man/figures/workflow.jpg" alt="The Overview of SpaPheno" width="80%" height="80%" />
+<p class="caption">
+
+The Overview of SpaPheno
+</p>
+
+</div>
 
 ## :sunny: Key Features
 
@@ -50,9 +74,9 @@ library(survival)
 
 ### Data availability
 
-The data required for the test are all listed in the following directory
-[SpaPheno Demo
-Data](https://www.jianguoyun.com/d/home#/sandbox/1b33454/663a25cbfea24b7b/%2F/).
+The data required for the test are all listed in the following google
+cloud directory [SpaPheno Demo
+Data](https://drive.google.com/drive/folders/1tiSgMjhzvIsirvJwFDIAQIEIhR7qixUW?usp=drive_link).
 
     ├── BRCAsurvival.RData
     ├── HCC_stage.RData
@@ -211,5 +235,3 @@ Single-Cell Data*. R package version 0.0.1,
 ## :writing_hand: Authors
 
 - [Bin Duan](mailto:binduan@sjtu.edu.cn)
-
-- [Hua Zou](mailto:zouhua1@outlook.com)

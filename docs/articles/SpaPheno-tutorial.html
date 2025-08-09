@@ -62,7 +62,7 @@
       SJTU<br><a class="author_email" href="mailto:#"></a><a href="mailto:binduan@sjtu.edu.cn" class="email">binduan@sjtu.edu.cn</a>
       </address>
                   
-            <h4 data-toc-skip class="date">2025-08-04</h4>
+            <h4 data-toc-skip class="date">2025-08-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/DuanLab1/SpaPheno/blob/HEAD/vignettes/SpaPheno-tutorial.Rmd"><code>vignettes/SpaPheno-tutorial.Rmd</code></a></small>
       <div class="d-none name"><code>SpaPheno-tutorial.Rmd</code></div>
@@ -75,7 +75,21 @@
 </h2>
 <p><strong>SpaPheno</strong> is an R package designed to identify,
 visualize, and interpret spatial phenotype associations from spatial
-transcriptomics and simulated bulk data. It enables users to:</p>
+transcriptomics and simulated bulk data. Linking spatial transcriptomic
+patterns to clinical phenotypes is essential for advancing precision
+oncology. We introduce SpaPheno, an interpretable machine learning
+framework that bridges spatial transcriptomic data with clinically
+annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net
+regression with SHAP-based interpretation to identify spatially
+localized features—such as cell types and tissue regions—that are
+predictive of patient survival, tumor stage, and immunotherapy response.
+Through comprehensive simulations and applications to spatial datasets
+from primary liver cancer, kidney renal clear cell carcinoma (KIRC),
+breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior
+performance and broad applicability. By jointly optimizing predictive
+power and biological interpretability, SpaPheno enables the discovery of
+clinically meaningful spatial biomarkers, offering a generalizable
+approach for spatially informed precision medicine.</p>
 <ul>
 <li>
 <strong>Construct predictive models</strong> from cell type
@@ -90,6 +104,11 @@ permutation-based tests.</li>
 <strong>Interpret feature contributions</strong> using SHAP (SHapley
 Additive exPlanations) analysis at single-cell resolution.</li>
 </ul>
+<div class="figure" style="text-align: center">
+<img src="figures%2Fworkflow.jpg" alt="The Overview of SpaPheno" width="80%" height="80%"><p class="caption">
+The Overview of SpaPheno
+</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -172,11 +191,11 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_cellType</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-2-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-3-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-2-2.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-3-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="choose-simulated-phenotypes">Choose simulated phenotypes<a class="anchor" aria-label="anchor" href="#choose-simulated-phenotypes"></a>
@@ -198,7 +217,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">Ground_truth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">custom_colors</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-4-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-5-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="simulating-bulk-data-with-phenotypes">Simulating bulk data with phenotypes<a class="anchor" aria-label="anchor" href="#simulating-bulk-data-with-phenotypes"></a>
@@ -233,7 +252,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>  sample_information_cellType <span class="op">=</span> <span class="va">sample_information_cellType</span>, </span>
 <span>  n_perm <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>  p <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-6-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-6-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-6-3.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-7-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-7-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-7-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="shap-analysis">SHAP analysis<a class="anchor" aria-label="anchor" href="#shap-analysis"></a>
@@ -266,7 +285,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_summary_plot.html">SpaPheno_SHAP_summary_plot</a></span><span class="op">(</span><span class="va">shap_test_plus</span>, top_n <span class="op">=</span> <span class="fl">31</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-8-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="shap-residual-analysis">SHAP residual analysis<a class="anchor" aria-label="anchor" href="#shap-residual-analysis"></a>
@@ -293,13 +312,13 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span><span class="co">## 39     0.2285343    2.558245 High residual        High</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_waterfall_plot.html">SpaPheno_SHAP_waterfall_plot</a></span><span class="op">(</span><span class="va">shap_test_plus</span>, <span class="st">"cell_5593"</span>, top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-9-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resi_result</span><span class="op">$</span><span class="va">dependence_plot</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-9-2.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-10-2.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resi_result</span><span class="op">$</span><span class="va">spatial_plot</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-9-3.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-10-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -315,11 +334,11 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_cellType</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-10-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-11-1.png" width="700" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-10-2.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-11-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="choose-simulated-phenotypes-1">Choose simulated phenotypes<a class="anchor" aria-label="anchor" href="#choose-simulated-phenotypes-1"></a>
@@ -342,7 +361,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">Ground_truth</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">custom_colors</span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-12-1.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-13-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="obtain-simulated-data-with-phenotypes">Obtain simulated data with phenotypes<a class="anchor" aria-label="anchor" href="#obtain-simulated-data-with-phenotypes"></a>
@@ -381,7 +400,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>  n_perm <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>  p <span class="op">=</span> <span class="fl">0.001</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-14-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-14-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-14-3.png" width="700" style="display: block; margin: auto;"></p>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-15-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-15-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-15-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -721,7 +740,7 @@ spatial origins of complex phenotypes.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.4.3 (2025-02-28)</span></span>
 <span><span class="co">## Platform: aarch64-apple-darwin20</span></span>
-<span><span class="co">## Running under: macOS Sequoia 15.5</span></span>
+<span><span class="co">## Running under: macOS Sequoia 15.6</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib </span></span>
@@ -782,7 +801,7 @@ spatial origins of complex phenotypes.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Bin Duan, Hua Zou.</p>
+  <p>Developed by Bin Duan.</p>
 </div>
 
 <div class="pkgdown-footer-right">
