@@ -3,20 +3,29 @@ Type: Package
 Title: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning
 Version: 0.0.1
 Authors@R: c(
-    person("Bin", "Duan", email = "binduan@sjtu.edu.cn", role = c("aut", "cre"))
+    person("Bin", "Duan", email = "binduan@sjtu.edu.cn", role = c("aut", "cre")),
+    person("Hua", "Zou", email = "zouhua1@outlook.com", role = c("aut"))
   )
-Description: Linking spatial transcriptomic patterns to clinical phenotypes is 
-  essential for advancing precision oncology. We introduce SpaPheno, an interpretable 
-  machine learning framework that bridges spatial transcriptomic data with clinically 
-  annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with 
-  SHAP-based interpretation to identify spatially localized features—such as 
-  cell types and tissue regions—that are predictive of patient survival, tumor stage, 
-  and immunotherapy response. Through comprehensive simulations and applications to 
-  spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), 
-  breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and 
-  broad applicability. By jointly optimizing predictive power and biological interpretability, 
-  SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a 
-  generalizable approach for spatially informed precision medicine.
+Date: 2025-08-09
+Description: an R package designed to identify, visualize, and interpret spatial 
+  phenotype associations from spatial transcriptomics and simulated bulk data.
+  Linking spatial transcriptomic patterns to clinically relevant phenotypes 
+  is a critical step toward spatially informed precision oncology. 
+  Here, we introduce SpaPheno, an interpretable machine learning framework that 
+  integrates spatial transcriptomics with clinically annotated bulk RNA-seq data 
+  to uncover spatially resolved biomarkers predictive of patient outcomes. 
+  Leveraging Elastic Net regression combined with SHAP-based attribution, 
+  SpaPheno uniquely identifies spatial features at multiple scales—from tissue 
+  regions to specific cell types and individual spatial spots—that are associated 
+  with patient survival, tumor stage, and immunotherapy response. We demonstrate 
+  the robustness and generalizability of SpaPheno through comprehensive 
+  simulations and applications spanning primary liver cancer, clear cell renal 
+  cell carcinoma, breast cancer, and melanoma. Across these diverse settings, 
+  SpaPheno achieves high predictive accuracy while providing biologically 
+  meaningful and spatially precise interpretations. Our framework offers 
+  a powerful and extensible approach for translating complex spatial omics data 
+  into actionable clinical insights, accelerating the development of precision 
+  oncology strategies grounded in tumor spatial architecture.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -47,5 +56,5 @@ Suggests:
     Matrix,
     BiocStyle
 VignetteBuilder: knitr
-BugReports: https://github.com/DuanLab1/SpaPheno/issues
-URL: https://github.com/DuanLab1/SpaPheno
+BugReports: https://github.com/Duan-Lab1/SpaPheno/issues
+URL: https://github.com/Duan-Lab1/SpaPheno

@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning">
-<meta name="description" content="Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.">
-<meta property="og:description" content="Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.">
+<meta name="description" content="an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data. Linking spatial transcriptomic patterns to clinically relevant phenotypes is a critical step toward spatially informed precision oncology. Here, we introduce SpaPheno, an interpretable machine learning framework that integrates spatial transcriptomics with clinically annotated bulk RNA-seq data to uncover spatially resolved biomarkers predictive of patient outcomes. Leveraging Elastic Net regression combined with SHAP-based attribution, SpaPheno uniquely identifies spatial features at multiple scales—from tissue regions to specific cell types and individual spatial spots—that are associated with patient survival, tumor stage, and immunotherapy response. We demonstrate the robustness and generalizability of SpaPheno through comprehensive simulations and applications spanning primary liver cancer, clear cell renal cell carcinoma, breast cancer, and melanoma. Across these diverse settings, SpaPheno achieves high predictive accuracy while providing biologically meaningful and spatially precise interpretations. Our framework offers a powerful and extensible approach for translating complex spatial omics data into actionable clinical insights, accelerating the development of precision oncology strategies grounded in tumor spatial architecture.">
+<meta property="og:description" content="an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data. Linking spatial transcriptomic patterns to clinically relevant phenotypes is a critical step toward spatially informed precision oncology. Here, we introduce SpaPheno, an interpretable machine learning framework that integrates spatial transcriptomics with clinically annotated bulk RNA-seq data to uncover spatially resolved biomarkers predictive of patient outcomes. Leveraging Elastic Net regression combined with SHAP-based attribution, SpaPheno uniquely identifies spatial features at multiple scales—from tissue regions to specific cell types and individual spatial spots—that are associated with patient survival, tumor stage, and immunotherapy response. We demonstrate the robustness and generalizability of SpaPheno through comprehensive simulations and applications spanning primary liver cancer, clear cell renal cell carcinoma, breast cancer, and melanoma. Across these diverse settings, SpaPheno achieves high predictive accuracy while providing biologically meaningful and spatially precise interpretations. Our framework offers a powerful and extensible approach for translating complex spatial omics data into actionable clinical insights, accelerating the development of precision oncology strategies grounded in tumor spatial architecture.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -35,7 +35,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/SpaPheno-tutorial.html">SpaPheno Tutorial: Spatially-Informed Phenotype Prediction and Interpretation Using Single-Cell Data</a></li>
+<li><a class="dropdown-item" href="articles/SpaPheno-tutorial.html">SpaPheno Tutorial: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -44,7 +44,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="nav-link" href="https://github.com/DuanLab1/SpaPheno/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="nav-link" href="https://github.com/Duan-Lab1/SpaPheno/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -58,7 +58,8 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><strong>SpaPheno</strong> is an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data. Linking spatial transcriptomic patterns to clinical phenotypes is essential for advancing precision oncology. We introduce SpaPheno, an interpretable machine learning framework that bridges spatial transcriptomic data with clinically annotated bulk RNA-seq datasets. SpaPheno integrates Elastic Net regression with SHAP-based interpretation to identify spatially localized features—such as cell types and tissue regions—that are predictive of patient survival, tumor stage, and immunotherapy response. Through comprehensive simulations and applications to spatial datasets from primary liver cancer, kidney renal clear cell carcinoma (KIRC), breast cancer (BRCA), and melanoma, SpaPheno demonstrates superior performance and broad applicability. By jointly optimizing predictive power and biological interpretability, SpaPheno enables the discovery of clinically meaningful spatial biomarkers, offering a generalizable approach for spatially informed precision medicine.</p>
+<p><strong>SpaPheno</strong> is an R package designed to identify, visualize, and interpret spatial phenotype associations from spatial transcriptomics and simulated bulk data.</p>
+<p>Linking spatial transcriptomic patterns to clinically relevant phenotypes is a critical step toward spatially informed precision oncology. Here, we introduce SpaPheno, an interpretable machine learning framework that integrates spatial transcriptomics with clinically annotated bulk RNA-seq data to uncover spatially resolved biomarkers predictive of patient outcomes. Leveraging Elastic Net regression combined with SHAP-based attribution, SpaPheno uniquely identifies spatial features at multiple scales—from tissue regions to specific cell types and individual spatial spots—that are associated with patient survival, tumor stage, and immunotherapy response. We demonstrate the robustness and generalizability of SpaPheno through comprehensive simulations and applications spanning primary liver cancer, clear cell renal cell carcinoma, breast cancer, and melanoma. Across these diverse settings, SpaPheno achieves high predictive accuracy while providing biologically meaningful and spatially precise interpretations. Our framework offers a powerful and extensible approach for translating complex spatial omics data into actionable clinical insights, accelerating the development of precision oncology strategies grounded in tumor spatial architecture.</p>
 <div class="figure" style="text-align: center">
 <img src="./reference/figures/workflow.jpg" alt="The Overview of SpaPheno" width="80%" height="80%"><p class="caption">
 The Overview of SpaPheno
@@ -70,14 +71,9 @@ The Overview of SpaPheno
 <span class="emoji" data-emoji="sunny">☀️</span> Key Features<a class="anchor" aria-label="anchor" href="#sunny-key-features"></a>
 </h2>
 <ul>
-<li>
-<strong>Construct predictive models</strong> from cell type compositions and phenotypic labels (e.g., disease presence).</li>
-<li>
-<strong>Map spatial risk distributions</strong> across tissues or organs using spatially-aware neighborhood features.</li>
-<li>
-<strong>Assess statistical significance</strong> through permutation-based tests.</li>
-<li>
-<strong>Interpret feature contributions</strong> using SHAP (SHapley Additive exPlanations) analysis at single-cell resolution.</li>
+<li><p><strong>Integration of spatial transcriptomics with clinically annotated bulk RNA-seq data</strong></p></li>
+<li><p><strong>Multi-scale interpretable machine learning framework</strong></p></li>
+<li><p><strong>Robust applicability across diverse cancer types and clinical endpoints</strong></p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -100,9 +96,9 @@ The Overview of SpaPheno
 <span><span class="co"># devtools::install_github("bm2-lab/SpaDo")</span></span>
 <span></span>
 <span><span class="co"># SpaPheno installation</span></span>
-<span><span class="co"># devtools::install_github("DuanLab1/SpaPheno", dependencies = c("Depends", "Imports", "LinkingTo"))</span></span>
+<span><span class="co"># devtools::install_github("Duan-Lab1/SpaPheno", dependencies = c("Depends", "Imports", "LinkingTo"))</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DuanLab1/SpaPheno">SpaPheno</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Duan-Lab1/SpaPheno">SpaPheno</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape" class="external-link">reshape2</a></span><span class="op">)</span></span>
@@ -137,7 +133,7 @@ The Overview of SpaPheno
 <h2 id="sparkling_heart-contributing">
 <span class="emoji" data-emoji="sparkling_heart">💖</span> Contributing<a class="anchor" aria-label="anchor" href="#sparkling_heart-contributing"></a>
 </h2>
-<p>Welcome any contributions or comments, and you can file them <a href="https://github.com/DuanLab1/SpaPheno/issues">here</a>.</p>
+<p>Welcome any contributions or comments, and you can file them <a href="https://github.com/Duan-Lab1/SpaPhenoissues">here</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="trophy-acknowledgement">
@@ -149,22 +145,23 @@ The Overview of SpaPheno
 <h2 id="eight_pointed_black_star-citation">
 <span class="emoji" data-emoji="eight_pointed_black_star">✴️</span> Citation<a class="anchor" aria-label="anchor" href="#eight_pointed_black_star-citation"></a>
 </h2>
-<p>Kindly cite by using <code>citation("SpaPheno")</code> if you think <strong>SpaPheno</strong> helps you. Alternative way is Bin Duan (2025). <em>SpaPheno: Spatially-Informed Phenotype Prediction and Interpretation Using Single-Cell Data</em>. R package version 0.0.1, &lt;URL:<a href="https://github.com/DuanLab1/SpaPheno/" class="uri">https://github.com/DuanLab1/SpaPheno/</a>&gt;.</p>
+<p>Kindly cite by using <code>citation("SpaPheno")</code> if you think <strong>SpaPheno</strong> helps you. Alternative way is Bin Duan (2025). <em>SpaPheno: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning</em>. R package version 0.0.1, &lt;URL:<a href="https://github.com/Duan-Lab1/SpaPheno" class="uri">https://github.com/Duan-Lab1/SpaPheno</a>&gt;.</p>
 </div>
 <div class="section level2">
 <h2 id="writing_hand-authors">
 <span class="emoji" data-emoji="writing_hand">✍️</span> Authors<a class="anchor" aria-label="anchor" href="#writing_hand-authors"></a>
 </h2>
 <ul>
-<li><a href="mailto:binduan@sjtu.edu.cn">Bin Duan</a></li>
+<li><p><a href="mailto:binduan@sjtu.edu.cn">Bin Duan</a></p></li>
+<li><p><a href="mailto:zouhua1@outlook.com">Hua Zou</a></p></li>
 </ul>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/DuanLab1/SpaPheno/">Browse source code</a></li>
-<li><a href="https://github.com/DuanLab1/SpaPheno/issues">Report a bug</a></li>
+<li><a href="https://github.com/Duan-Lab1/SpaPheno/">Browse source code</a></li>
+<li><a href="https://github.com/Duan-Lab1/SpaPheno/issues">Report a bug</a></li>
 </ul>
 </div>
 
@@ -188,6 +185,7 @@ The Overview of SpaPheno
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Bin Duan <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Hua Zou <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
 
@@ -198,7 +196,7 @@ The Overview of SpaPheno
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Bin Duan.</p>
+  <p>Developed by Bin Duan, Hua Zou.</p>
 </div>
 
 <div class="pkgdown-footer-right">

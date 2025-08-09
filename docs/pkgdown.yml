@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   SpaPheno-tutorial: SpaPheno-tutorial.html
-last_built: 2025-08-09T02:35Z
+last_built: 2025-08-09T04:16Z
 urls:
-  reference: https://github.com/DuanLab1/SpaPheno/reference
-  article: https://github.com/DuanLab1/SpaPheno/articles
+  reference: https://github.com/Duan-Lab1/SpaPheno/reference
+  article: https://github.com/Duan-Lab1/SpaPheno/articles
