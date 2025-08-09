@@ -4,10 +4,6 @@
 
 ## Overview
 
-**SpaPheno** is an R package designed to identify, visualize, and
-interpret spatial phenotype associations from spatial transcriptomics
-and simulated bulk data.
-
 Linking spatial transcriptomic patterns to clinically relevant
 phenotypes is a critical step toward spatially informed precision
 oncology. Here, we introduce SpaPheno, an interpretable machine learning
@@ -74,6 +70,13 @@ library(ggplot2)
 library(reshape2)
 library(stringr)
 library(survival)
+```
+
+Download the pre-packaged installation package directly from the [GitHub
+repository](https://github.com/Duan-Lab1/SpaPheno/releases)
+
+``` r
+install.packages("SpaPheno_0.0.1.tar.gz", repos = NULL, type = "source")
 ```
 
 ## 🚀 Quick Start

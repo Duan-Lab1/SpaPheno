@@ -7,9 +7,7 @@ Authors@R: c(
     person("Hua", "Zou", email = "zouhua1@outlook.com", role = c("aut"))
   )
 Date: 2025-08-09
-Description: an R package designed to identify, visualize, and interpret spatial 
-  phenotype associations from spatial transcriptomics and simulated bulk data.
-  Linking spatial transcriptomic patterns to clinically relevant phenotypes 
+Description: Linking spatial transcriptomic patterns to clinically relevant phenotypes 
   is a critical step toward spatially informed precision oncology. 
   Here, we introduce SpaPheno, an interpretable machine learning framework that 
   integrates spatial transcriptomics with clinically annotated bulk RNA-seq data 
