@@ -151,8 +151,8 @@ handling.</p>
 <div class="section level2">
 <h2 id="data-availability">Data availability<a class="anchor" aria-label="anchor" href="#data-availability"></a>
 </h2>
-<p>The data required for the test are all listed in the following
-directory <a href="https://www.jianguoyun.com/d/home#/sandbox/1b33454/663a25cbfea24b7b/%2F/" class="external-link">SpaPheno
+<p>The data required for the test are all listed in the following google
+cloud directory <a href="https://drive.google.com/drive/folders/1tiSgMjhzvIsirvJwFDIAQIEIhR7qixUW?usp=drive_link" class="external-link">SpaPheno
 Demo Data</a>.</p>
 <pre><code>├── BRCAsurvival.RData
 ├── HCC_stage.RData
@@ -425,6 +425,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>    name <span class="op">=</span> <span class="st">"Region Type"</span>, </span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Non-TLS"</span>, <span class="st">"TLS"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-16-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="obtain-prediction-results-1">Obtain prediction results<a class="anchor" aria-label="anchor" href="#obtain-prediction-results-1"></a>
@@ -442,6 +443,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>  p <span class="op">=</span> <span class="fl">0.001</span>,</span>
 <span>  r <span class="op">=</span> <span class="fl">4</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-17-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-17-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-17-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="shap-analysis-1">SHAP analysis<a class="anchor" aria-label="anchor" href="#shap-analysis-1"></a>
@@ -454,42 +456,85 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">PhenoResult</span><span class="op">$</span><span class="va">model</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">PhenoResult</span><span class="op">$</span><span class="va">cell_type_distribution</span><span class="op">[</span><span class="va">phenoMinus</span>, <span class="op">]</span></span>
 <span><span class="va">shap_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compute_shap_spatial.html">compute_shap_spatial</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">bulk_decon</span>, <span class="va">bulk_pheno</span>, <span class="va">X</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/SpaPheno_SHAP_summary_plot.html">SpaPheno_SHAP_summary_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##             feature           phi      phi.var feature.value             sample</span></span>
+<span><span class="co">## 1        Bio.potent  0.0005838659 1.551781e-05   0.105472520 AAACAAGTATCTCCCA-1</span></span>
+<span><span class="co">## 2               CAF -0.0435152693 1.767573e-03   0.119948046 AAACAAGTATCTCCCA-1</span></span>
+<span><span class="co">## 3 CCL3L1.Macrophage  0.0000000000 0.000000e+00   0.005836406 AAACAAGTATCTCCCA-1</span></span>
+<span><span class="co">## 4         CD8..MAIT -0.0197043006 3.004776e-04   0.009533719 AAACAAGTATCTCCCA-1</span></span>
+<span><span class="co">## 5          CD8..Trm -0.0520022782 2.085855e-03   0.008196035 AAACAAGTATCTCCCA-1</span></span>
+<span><span class="co">## 6           CD16.NK  0.0500187685 3.619665e-03   0.006682971 AAACAAGTATCTCCCA-1</span></span></code></pre>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_summary_plot.html">SpaPheno_SHAP_summary_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-18-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="shap-residual-analysis-1">SHAP residual analysis<a class="anchor" aria-label="anchor" href="#shap-residual-analysis-1"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resi_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpaPheno_SHAP_residual_analysis.html">SpaPheno_SHAP_residual_analysis</a></span><span class="op">(</span></span>
 <span>  shap_df <span class="op">=</span> <span class="va">shap_test</span>,</span>
 <span>  feature_name <span class="op">=</span> <span class="st">"Naive.CD4T"</span>,</span>
 <span>  coordinate_df <span class="op">=</span> <span class="va">test_coordinate</span>, size <span class="op">=</span> <span class="fl">0.8</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">resi_result</span><span class="op">$</span><span class="va">dependence_plot</span></span>
-<span><span class="va">resi_result</span><span class="op">$</span><span class="va">spatial_plot</span></span></code></pre></div>
+<span><span class="va">resi_result</span><span class="op">$</span><span class="va">dependence_plot</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-19-1.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resi_result</span><span class="op">$</span><span class="va">spatial_plot</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-19-2.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="shap-waterfall-plot">SHAP waterfall plot<a class="anchor" aria-label="anchor" href="#shap-waterfall-plot"></a>
 </h3>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resi_hot</span> <span class="op">&lt;-</span> <span class="va">resi_result</span><span class="op">$</span><span class="va">residual_table</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">resi_hot</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">resi_hot</span><span class="op">$</span><span class="va">phi_resid_z</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, <span class="op">]</span>, <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/SpaPheno_SHAP_waterfall_plot.html">SpaPheno_SHAP_waterfall_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="st">"TCGCCGGAGAGTCTTA-1"</span>, top_n <span class="op">=</span> <span class="fl">48</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">resi_hot</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">resi_hot</span><span class="op">$</span><span class="va">phi_resid_z</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, <span class="op">]</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##        feature        phi    phi.var feature.value             sample</span></span>
+<span><span class="co">## 30  Naive.CD4T -0.5257900 0.13837004    0.04155390 AATTCCAACTTGGTGA-1</span></span>
+<span><span class="co">## 51  Naive.CD4T -0.3821739 0.07231961    0.11206579 ACGACTCTAGGGCCGA-1</span></span>
+<span><span class="co">## 474 Naive.CD4T -0.5322684 0.17930920    0.05231648 TTATATACGCTGTCAC-1</span></span>
+<span><span class="co">## 420 Naive.CD4T -0.4955256 0.07926515    0.04394551 TCGCCTCGACCTGTTG-1</span></span>
+<span><span class="co">## 453 Naive.CD4T -0.5082004 0.09662787    0.04816872 TGGACTGTTCGCTCAA-1</span></span>
+<span><span class="co">## 181 Naive.CD4T -0.4916031 0.07350465    0.04604062 CGCATTAGCTAATAGG-1</span></span>
+<span><span class="co">## 331 Naive.CD4T -0.4994501 0.11421113    0.05003514 GTACTAAGATTTGGAG-1</span></span>
+<span><span class="co">## 136 Naive.CD4T -0.4456933 0.12689195    0.11926253 CAGGGCTAACGAAACC-1</span></span>
+<span><span class="co">## 419 Naive.CD4T -0.3278083 0.07309902    0.08241027 TCGCCTCCTTCGGCTC-1</span></span>
+<span><span class="co">## 379 Naive.CD4T -0.3405043 0.08242797    0.08543729 TAGCAGATACTTAGGG-1</span></span>
+<span><span class="co">##     phi_residual phi_resid_z   resid_group color_group</span></span>
+<span><span class="co">## 30    -0.1972143   -3.930519  Low residual         Low</span></span>
+<span><span class="co">## 51     0.1790110    3.567723 High residual        High</span></span>
+<span><span class="co">## 474   -0.1681884   -3.352028  Low residual         Low</span></span>
+<span><span class="co">## 420   -0.1590603   -3.170102  Low residual         Low</span></span>
+<span><span class="co">## 453   -0.1578033   -3.145050  Low residual         Low</span></span>
+<span><span class="co">## 181   -0.1482263   -2.954179  Low residual         Low</span></span>
+<span><span class="co">## 331   -0.1428959   -2.847942  Low residual         Low</span></span>
+<span><span class="co">## 136    0.1392326    2.774932 High residual        High</span></span>
+<span><span class="co">## 419    0.1355471    2.701479 High residual        High</span></span>
+<span><span class="co">## 379    0.1328367    2.647461 High residual        High</span></span></code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_waterfall_plot.html">SpaPheno_SHAP_waterfall_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="st">"TCGCCGGAGAGTCTTA-1"</span>, top_n <span class="op">=</span> <span class="fl">48</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-20-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="shap-dependence-plot">SHAP dependence plot<a class="anchor" aria-label="anchor" href="#shap-dependence-plot"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">TCell_subtypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span>, <span class="st">"CD.T"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">BCell_subtypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span>, <span class="st">"BCell"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">Monocyte_subtypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span>, <span class="st">"Monocyte"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">Macrophage_subtypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">shap_test</span><span class="op">$</span><span class="va">feature</span><span class="op">)</span>, <span class="st">"Macrophage"</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">TCell_subtypes</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">BCell_subtypes</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">Monocyte_subtypes</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">Macrophage_subtypes</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">TCell_subtypes</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-21-1.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">BCell_subtypes</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-21-2.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">Monocyte_subtypes</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-21-3.png" width="700" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpaPheno_SHAP_dependence_plot.html">SpaPheno_SHAP_dependence_plot</a></span><span class="op">(</span><span class="va">shap_test</span>, <span class="va">Macrophage_subtypes</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-21-4.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -498,12 +543,12 @@ local cell-type environments contribute to complex phenotypes.</p>
 <div class="section level3">
 <h3 id="load-demo-data-1">load demo data<a class="anchor" aria-label="anchor" href="#load-demo-data-1"></a>
 </h3>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"BRCAsurvival.RData"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">### survival phenotype</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"BRCAsurvival.RData"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### survival phenotype</span></span>
 <span><span class="va">TCGA_survival_each</span> <span class="op">&lt;-</span> <span class="va">TCGA_BRCA</span><span class="op">$</span><span class="va">TCGA.BRCA.survival.tsv</span></span>
 <span><span class="va">Survival_TCGA_choose</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">TCGA_survival_each</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">Survival_TCGA_choose</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">Survival_TCGA_choose</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
@@ -531,14 +576,15 @@ local cell-type environments contribute to complex phenotypes.</p>
 <div class="section level3">
 <h3 id="ground-truth">Ground truth<a class="anchor" aria-label="anchor" href="#ground-truth"></a>
 </h3>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-24-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="obtain-predicion-results">Obtain predicion results<a class="anchor" aria-label="anchor" href="#obtain-predicion-results"></a>
 </h3>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PhenoResult</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpatialPhenoMap.html">SpatialPhenoMap</a></span><span class="op">(</span></span>
 <span>  bulk_decon <span class="op">=</span> <span class="va">bulk_decon</span>, </span>
 <span>  bulk_pheno <span class="op">=</span> <span class="va">bulk_pheno</span>, </span>
@@ -550,6 +596,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>  n_perm <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>  p <span class="op">=</span> <span class="fl">0.001</span>, </span>
 <span>  r <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-25-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-25-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-25-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -558,12 +605,12 @@ local cell-type environments contribute to complex phenotypes.</p>
 <div class="section level3">
 <h3 id="load-demo-data-2">load demo data<a class="anchor" aria-label="anchor" href="#load-demo-data-2"></a>
 </h3>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"KIRC_survival.RData"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">### survival phenotype</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"KIRC_survival.RData"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### survival phenotype</span></span>
 <span><span class="va">TCGA_survival_each</span> <span class="op">&lt;-</span> <span class="va">TCGA_KIRC</span><span class="op">$</span><span class="va">TCGA.KIRC.survival.tsv</span></span>
 <span><span class="va">Survival_TCGA_choose</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">TCGA_survival_each</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">Survival_TCGA_choose</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">Survival_TCGA_choose</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
@@ -590,7 +637,7 @@ local cell-type environments contribute to complex phenotypes.</p>
 <div class="section level3">
 <h3 id="ground-truth-1">Ground Truth<a class="anchor" aria-label="anchor" href="#ground-truth-1"></a>
 </h3>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">test_coordinate</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span>, y <span class="op">=</span> <span class="va">Y</span>, color <span class="op">=</span> <span class="va">sample_information_region</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span></span>
@@ -601,11 +648,12 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>    name <span class="op">=</span> <span class="st">"Region Type"</span>,</span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NO_TLS"</span>, <span class="st">"TLS"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-28-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="prediction-result">Prediction result<a class="anchor" aria-label="anchor" href="#prediction-result"></a>
 </h3>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PhenoResult</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpatialPhenoMap.html">SpatialPhenoMap</a></span><span class="op">(</span></span>
 <span>  bulk_decon <span class="op">=</span> <span class="va">bulk_decon</span>,</span>
 <span>  bulk_pheno <span class="op">=</span> <span class="va">bulk_pheno</span>, </span>
@@ -618,12 +666,14 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>  p <span class="op">=</span> <span class="fl">0.005</span>, </span>
 <span>  r <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-29-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-29-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-29-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="hclust-of-low-risk-region">Hclust of low risk region<a class="anchor" aria-label="anchor" href="#hclust-of-low-risk-region"></a>
 </h3>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/PhenotypeHclust.html">PhenotypeHclust</a></span><span class="op">(</span><span class="va">PhenoResult</span>, <span class="st">"phenotype-"</span>, <span class="va">test_coordinate</span>, size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-30-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-30-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-30-3.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-30-4.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -632,11 +682,11 @@ local cell-type environments contribute to complex phenotypes.</p>
 <div class="section level3">
 <h3 id="load-data-2">load data<a class="anchor" aria-label="anchor" href="#load-data-2"></a>
 </h3>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"HCC_stage.RData"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#### common samples between stage phenotype and deconvolution</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"HCC_stage.RData"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#### common samples between stage phenotype and deconvolution</span></span>
 <span><span class="va">common_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">sample_information_stage</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">LIHC_decon</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">LIHC_decon</span> <span class="op">&lt;-</span> <span class="va">LIHC_decon</span><span class="op">[</span><span class="va">common_sample</span>, <span class="op">]</span></span>
 <span><span class="va">sample_information_stage</span> <span class="op">&lt;-</span> <span class="va">sample_information_stage</span><span class="op">[</span><span class="va">common_sample</span><span class="op">]</span></span>
@@ -668,11 +718,12 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>    name <span class="op">=</span> <span class="st">"Region Type"</span>,</span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Non-TLS"</span>, <span class="st">"TLS"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-32-1.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="obtain-prdiction-result">Obtain prdiction result<a class="anchor" aria-label="anchor" href="#obtain-prdiction-result"></a>
 </h3>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PhenoResult</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpatialPhenoMap.html">SpatialPhenoMap</a></span><span class="op">(</span></span>
 <span>  bulk_decon <span class="op">=</span> <span class="va">bulk_decon</span>,</span>
 <span>  bulk_pheno <span class="op">=</span> <span class="va">bulk_pheno</span>,</span>
@@ -684,6 +735,49 @@ local cell-type environments contribute to complex phenotypes.</p>
 <span>  n_perm <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>  p <span class="op">=</span> <span class="fl">0.001</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-33-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-33-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-33-3.png" width="700" style="display: block; margin: auto;"></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="icb-melanoma">ICB melanoma<a class="anchor" aria-label="anchor" href="#icb-melanoma"></a>
+</h2>
+<div class="section level3">
+<h3 id="load-data-3">load data<a class="anchor" aria-label="anchor" href="#load-data-3"></a>
+</h3>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html" class="external-link">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"Melanoma_ICB.RData"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">test_coordinate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">Melanoma_ST</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">Melanoma_ST</span><span class="op">$</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">test_coordinate</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="st">"X"</span><span class="op">)</span></span>
+<span><span class="va">test_coordinate</span> <span class="op">&lt;-</span> <span class="va">test_coordinate</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X"</span>, <span class="st">"Y"</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">bulk_decon</span> <span class="op">&lt;-</span> <span class="va">bulk_decon</span></span>
+<span><span class="va">bulk_pheno</span> <span class="op">&lt;-</span> <span class="va">bulk_pheno</span></span>
+<span><span class="va">family</span> <span class="op">&lt;-</span> <span class="st">"binomial"</span></span>
+<span></span>
+<span><span class="va">coord</span> <span class="op">&lt;-</span> <span class="va">test_coordinate</span></span>
+<span><span class="va">resolution</span> <span class="op">&lt;-</span> <span class="st">"spot"</span></span>
+<span><span class="va">sample_information_decon</span> <span class="op">&lt;-</span> <span class="va">Melanoma_ST_decon</span></span>
+<span><span class="co"># sample_information_decon&lt;-t(apply(sample_information_decon,1,function(x){x/sum(x)}))</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">bulk_decon</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^[^_]*_[^_]*_[^_]*_sf_"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">bulk_decon</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sample_information_decon</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^[^_]*_[^_]*_[^_]*_sf_"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sample_information_decon</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="obtain-predicion-results-1">Obtain predicion results<a class="anchor" aria-label="anchor" href="#obtain-predicion-results-1"></a>
+</h3>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PhenoResult</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/SpatialPhenoMap.html">SpatialPhenoMap</a></span><span class="op">(</span></span>
+<span>  bulk_decon <span class="op">=</span> <span class="va">bulk_decon</span>, </span>
+<span>  bulk_pheno <span class="op">=</span> <span class="va">bulk_pheno</span>, </span>
+<span>  family <span class="op">=</span> <span class="va">family</span>, </span>
+<span>  coord <span class="op">=</span> <span class="va">test_coordinate</span>, </span>
+<span>  resolution <span class="op">=</span> <span class="st">"spot"</span>, </span>
+<span>  sample_information_decon <span class="op">=</span> <span class="va">sample_information_decon</span>, </span>
+<span>  size <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  n_perm <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  p <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
+<p><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-36-1.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-36-2.png" width="700" style="display: block; margin: auto;"><img src="SpaPheno-tutorial_files/figure-html/unnamed-chunk-36-3.png" width="700" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -736,7 +830,7 @@ spatial origins of complex phenotypes.</p>
 <div class="section level2">
 <h2 id="system-information">System information<a class="anchor" aria-label="anchor" href="#system-information"></a>
 </h2>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.4.3 (2025-02-28)</span></span>
 <span><span class="co">## Platform: aarch64-apple-darwin20</span></span>
@@ -756,43 +850,63 @@ spatial origins of complex phenotypes.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">##  [1] survival_3.8-3      reshape2_1.4.4      lubridate_1.9.4    </span></span>
-<span><span class="co">##  [4] forcats_1.0.0       stringr_1.5.1       dplyr_1.1.4        </span></span>
-<span><span class="co">##  [7] purrr_1.0.4         readr_2.1.5         tidyr_1.3.1        </span></span>
-<span><span class="co">## [10] tibble_3.3.0        ggplot2_3.5.2       tidyverse_2.0.0    </span></span>
-<span><span class="co">## [13] SpaPheno_0.0.1      BiocManager_1.30.25 BiocStyle_2.34.0   </span></span>
+<span><span class="co">##  [1] umap_0.2.10.0       fastcluster_1.2.6   philentropy_0.9.0  </span></span>
+<span><span class="co">##  [4] Seurat_5.3.0        SeuratObject_5.0.2  sp_2.2-0           </span></span>
+<span><span class="co">##  [7] survival_3.8-3      reshape2_1.4.4      lubridate_1.9.4    </span></span>
+<span><span class="co">## [10] forcats_1.0.0       stringr_1.5.1       dplyr_1.1.4        </span></span>
+<span><span class="co">## [13] purrr_1.0.4         readr_2.1.5         tidyr_1.3.1        </span></span>
+<span><span class="co">## [16] tibble_3.3.0        ggplot2_3.5.2       tidyverse_2.0.0    </span></span>
+<span><span class="co">## [19] SpaPheno_0.0.1      BiocManager_1.30.25 BiocStyle_2.34.0   </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] pROC_1.18.5          gridExtra_2.3        rlang_1.1.6         </span></span>
-<span><span class="co">##  [4] magrittr_2.0.3       compiler_4.4.3       mgcv_1.9-1          </span></span>
-<span><span class="co">##  [7] systemfonts_1.2.1    vctrs_0.6.5          pkgconfig_2.0.3     </span></span>
-<span><span class="co">## [10] shape_1.4.6.1        fastmap_1.2.0        backports_1.5.0     </span></span>
-<span><span class="co">## [13] labeling_0.4.3       rmarkdown_2.29       prodlim_2024.06.25  </span></span>
-<span><span class="co">## [16] tzdb_0.5.0           ragg_1.3.3           xfun_0.51           </span></span>
-<span><span class="co">## [19] glmnet_4.1-8         cachem_1.1.0         jsonlite_2.0.0      </span></span>
-<span><span class="co">## [22] recipes_1.2.0        parallel_4.4.3       R6_2.6.1            </span></span>
-<span><span class="co">## [25] bslib_0.9.0          stringi_1.8.4        parallelly_1.43.0   </span></span>
-<span><span class="co">## [28] rpart_4.1.24         jquerylib_0.1.4      Rcpp_1.0.14         </span></span>
-<span><span class="co">## [31] bookdown_0.42        iterators_1.0.14     knitr_1.50          </span></span>
-<span><span class="co">## [34] future.apply_1.11.3  Metrics_0.1.4        FNN_1.1.4.1         </span></span>
-<span><span class="co">## [37] Matrix_1.7-2         splines_4.4.3        nnet_7.3-20         </span></span>
-<span><span class="co">## [40] timechange_0.3.0     tidyselect_1.2.1     rstudioapi_0.17.1   </span></span>
-<span><span class="co">## [43] yaml_2.3.10          viridis_0.6.5        timeDate_4041.110   </span></span>
-<span><span class="co">## [46] codetools_0.2-20     listenv_0.9.1        lattice_0.22-6      </span></span>
-<span><span class="co">## [49] plyr_1.8.9           withr_3.0.2          evaluate_1.0.3      </span></span>
-<span><span class="co">## [52] future_1.34.0        desc_1.4.3           pillar_1.10.1       </span></span>
-<span><span class="co">## [55] checkmate_2.3.2      foreach_1.5.2        stats4_4.4.3        </span></span>
-<span><span class="co">## [58] generics_0.1.3       hms_1.1.3            munsell_0.5.1       </span></span>
-<span><span class="co">## [61] scales_1.3.0         globals_0.16.3       class_7.3-23        </span></span>
-<span><span class="co">## [64] glue_1.8.0           tools_4.4.3          data.table_1.17.0   </span></span>
-<span><span class="co">## [67] ModelMetrics_1.2.2.2 gower_1.0.2          fs_1.6.5            </span></span>
-<span><span class="co">## [70] grid_4.4.3           ipred_0.9-15         colorspace_2.1-1    </span></span>
-<span><span class="co">## [73] nlme_3.1-167         SpaDo_1.2.0          cli_3.6.4           </span></span>
-<span><span class="co">## [76] iml_0.11.4           textshaping_1.0.0    viridisLite_0.4.2   </span></span>
-<span><span class="co">## [79] lava_1.8.1           gtable_0.3.6         sass_0.4.9          </span></span>
-<span><span class="co">## [82] digest_0.6.37        caret_7.0-1          farver_2.1.2        </span></span>
-<span><span class="co">## [85] htmlwidgets_1.6.4    htmltools_0.5.8.1    pkgdown_2.1.1       </span></span>
-<span><span class="co">## [88] lifecycle_1.0.4      hardhat_1.4.1        MASS_7.3-64</span></span></code></pre>
+<span><span class="co">##   [1] RcppAnnoy_0.0.22       splines_4.4.3          later_1.4.1           </span></span>
+<span><span class="co">##   [4] polyclip_1.10-7        hardhat_1.4.1          pROC_1.18.5           </span></span>
+<span><span class="co">##   [7] rpart_4.1.24           fastDummies_1.7.5      lifecycle_1.0.4       </span></span>
+<span><span class="co">##  [10] globals_0.16.3         lattice_0.22-6         MASS_7.3-64           </span></span>
+<span><span class="co">##  [13] backports_1.5.0        magrittr_2.0.3         plotly_4.10.4         </span></span>
+<span><span class="co">##  [16] sass_0.4.9             rmarkdown_2.29         jquerylib_0.1.4       </span></span>
+<span><span class="co">##  [19] yaml_2.3.10            httpuv_1.6.15          sctransform_0.4.1     </span></span>
+<span><span class="co">##  [22] askpass_1.2.1          spam_2.11-1            spatstat.sparse_3.1-0 </span></span>
+<span><span class="co">##  [25] reticulate_1.42.0      cowplot_1.1.3          pbapply_1.7-2         </span></span>
+<span><span class="co">##  [28] RColorBrewer_1.1-3     abind_1.4-8            Rtsne_0.17            </span></span>
+<span><span class="co">##  [31] Metrics_0.1.4          nnet_7.3-20            ipred_0.9-15          </span></span>
+<span><span class="co">##  [34] lava_1.8.1             ggrepel_0.9.6          irlba_2.3.5.1         </span></span>
+<span><span class="co">##  [37] listenv_0.9.1          spatstat.utils_3.1-3   goftest_1.2-3         </span></span>
+<span><span class="co">##  [40] RSpectra_0.16-2        spatstat.random_3.3-3  fitdistrplus_1.2-2    </span></span>
+<span><span class="co">##  [43] parallelly_1.43.0      pkgdown_2.1.1          codetools_0.2-20      </span></span>
+<span><span class="co">##  [46] tidyselect_1.2.1       shape_1.4.6.1          farver_2.1.2          </span></span>
+<span><span class="co">##  [49] viridis_0.6.5          matrixStats_1.5.0      stats4_4.4.3          </span></span>
+<span><span class="co">##  [52] spatstat.explore_3.4-2 jsonlite_2.0.0         caret_7.0-1           </span></span>
+<span><span class="co">##  [55] progressr_0.15.1       ggridges_0.5.6         iterators_1.0.14      </span></span>
+<span><span class="co">##  [58] systemfonts_1.2.1      foreach_1.5.2          tools_4.4.3           </span></span>
+<span><span class="co">##  [61] ragg_1.3.3             ica_1.0-3              Rcpp_1.0.14           </span></span>
+<span><span class="co">##  [64] glue_1.8.0             prodlim_2024.06.25     gridExtra_2.3         </span></span>
+<span><span class="co">##  [67] xfun_0.51              withr_3.0.2            fastmap_1.2.0         </span></span>
+<span><span class="co">##  [70] iml_0.11.4             openssl_2.3.2          digest_0.6.37         </span></span>
+<span><span class="co">##  [73] timechange_0.3.0       R6_2.6.1               mime_0.13             </span></span>
+<span><span class="co">##  [76] textshaping_1.0.0      colorspace_2.1-1       scattermore_1.2       </span></span>
+<span><span class="co">##  [79] tensor_1.5             spatstat.data_3.1-6    generics_0.1.3        </span></span>
+<span><span class="co">##  [82] data.table_1.17.0      recipes_1.2.0          FNN_1.1.4.1           </span></span>
+<span><span class="co">##  [85] class_7.3-23           httr_1.4.7             htmlwidgets_1.6.4     </span></span>
+<span><span class="co">##  [88] uwot_0.2.3             ModelMetrics_1.2.2.2   pkgconfig_2.0.3       </span></span>
+<span><span class="co">##  [91] gtable_0.3.6           timeDate_4041.110      lmtest_0.9-40         </span></span>
+<span><span class="co">##  [94] htmltools_0.5.8.1      dotCall64_1.2          bookdown_0.42         </span></span>
+<span><span class="co">##  [97] scales_1.3.0           png_0.1-8              gower_1.0.2           </span></span>
+<span><span class="co">## [100] spatstat.univar_3.1-2  knitr_1.50             rstudioapi_0.17.1     </span></span>
+<span><span class="co">## [103] tzdb_0.5.0             checkmate_2.3.2        nlme_3.1-167          </span></span>
+<span><span class="co">## [106] cachem_1.1.0           zoo_1.8-13             SpaDo_1.2.0           </span></span>
+<span><span class="co">## [109] KernSmooth_2.23-26     parallel_4.4.3         miniUI_0.1.1.1        </span></span>
+<span><span class="co">## [112] desc_1.4.3             pillar_1.10.1          grid_4.4.3            </span></span>
+<span><span class="co">## [115] vctrs_0.6.5            RANN_2.6.2             promises_1.3.2        </span></span>
+<span><span class="co">## [118] xtable_1.8-4           cluster_2.1.8          evaluate_1.0.3        </span></span>
+<span><span class="co">## [121] cli_3.6.4              compiler_4.4.3         rlang_1.1.6           </span></span>
+<span><span class="co">## [124] future.apply_1.11.3    labeling_0.4.3         plyr_1.8.9            </span></span>
+<span><span class="co">## [127] fs_1.6.5               stringi_1.8.4          viridisLite_0.4.2     </span></span>
+<span><span class="co">## [130] deldir_2.0-4           munsell_0.5.1          lazyeval_0.2.2        </span></span>
+<span><span class="co">## [133] spatstat.geom_3.3-6    glmnet_4.1-8           Matrix_1.7-2          </span></span>
+<span><span class="co">## [136] RcppHNSW_0.6.0         hms_1.1.3              patchwork_1.3.0       </span></span>
+<span><span class="co">## [139] future_1.34.0          shiny_1.10.0           ROCR_1.0-11           </span></span>
+<span><span class="co">## [142] igraph_2.1.4           bslib_0.9.0</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

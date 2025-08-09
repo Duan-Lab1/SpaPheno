@@ -84,7 +84,7 @@ library(survival)
 
 ## Data availability
 
-The data required for the test are all listed in the following directory [SpaPheno Demo Data](https://www.jianguoyun.com/d/home#/sandbox/1b33454/663a25cbfea24b7b/%2F/).
+The data required for the test are all listed in the following google cloud directory [SpaPheno Demo Data](https://drive.google.com/drive/folders/1tiSgMjhzvIsirvJwFDIAQIEIhR7qixUW?usp=drive_link).
 
 ```
 ├── BRCAsurvival.RData
@@ -301,7 +301,7 @@ PhenoResult <- SpatialPhenoMap(
 
 ### load demo data
 
-```r
+```{r}
 rm(list = ls())
 
 load(system.file("extdata", "HCC_survival.RData", package = "SpaPheno"))
@@ -321,7 +321,7 @@ ggplot(test_coordinate, aes(x = X, y = Y, color = sample_information_region)) +
 
 ### Obtain prediction results
 
-```r
+```{r}
 PhenoResult <- SpatialPhenoMap(
   bulk_decon = bulk_decon,
   bulk_pheno = bulk_pheno,
@@ -338,7 +338,7 @@ PhenoResult <- SpatialPhenoMap(
 
 ### SHAP analysis
 
-```r
+```{r}
 pred_result <- PhenoResult$pred_score
 phenoPlus <- row.names(pred_result[pred_result$label %in% "phenotype+", ])
 phenoMinus <- row.names(pred_result[pred_result$label %in% "phenotype-", ])
@@ -352,7 +352,7 @@ SpaPheno_SHAP_summary_plot(shap_test, top_n = 10)
 
 ### SHAP residual analysis
 
-```r
+```{r}
 resi_result <- SpaPheno_SHAP_residual_analysis(
   shap_df = shap_test,
   feature_name = "Naive.CD4T",
@@ -364,7 +364,7 @@ resi_result$spatial_plot
 
 ### SHAP waterfall plot
 
-```r
+```{r}
 resi_hot <- resi_result$residual_table
 head(resi_hot[order(abs(resi_hot$phi_resid_z), decreasing = T), ], 10)
 SpaPheno_SHAP_waterfall_plot(shap_test, "TCGCCGGAGAGTCTTA-1", top_n = 48)
@@ -372,7 +372,7 @@ SpaPheno_SHAP_waterfall_plot(shap_test, "TCGCCGGAGAGTCTTA-1", top_n = 48)
 
 ### SHAP dependence plot
 
-```r
+```{r}
 TCell_subtypes <- unique(shap_test$feature)[str_detect(unique(shap_test$feature), "CD.T")]
 BCell_subtypes <- unique(shap_test$feature)[str_detect(unique(shap_test$feature), "BCell")]
 Monocyte_subtypes <- unique(shap_test$feature)[str_detect(unique(shap_test$feature), "Monocyte")]
@@ -389,11 +389,19 @@ SpaPheno_SHAP_dependence_plot(shap_test, Macrophage_subtypes)
 
 ### load demo data
 
+```{r, echo=FALSE}
+rm(list = ls())
+load("../../../data/raw/BRCAsurvival.RData")
+```
+
+
 ```r
 rm(list = ls())
 
 load("BRCAsurvival.RData")
+```
 
+```{r}
 ### survival phenotype
 TCGA_survival_each <- TCGA_BRCA$TCGA.BRCA.survival.tsv
 Survival_TCGA_choose <- as.data.frame(TCGA_survival_each)
@@ -422,14 +430,14 @@ colnames(sample_information_decon) <- gsub("^[^_]*_[^_]*_[^_]*_sf_", "", colname
 
 ### Ground truth
 
-```r
+```{r}
 ggplot(test_coordinate, aes(x = X, y = Y, color = sample_information_region)) +
   geom_point(size = 4)
 ```
 
 ### Obtain predicion results
 
-```r
+```{r}
 PhenoResult <- SpatialPhenoMap(
   bulk_decon = bulk_decon, 
   bulk_pheno = bulk_pheno, 
@@ -449,10 +457,19 @@ PhenoResult <- SpatialPhenoMap(
 
 ### load demo data
 
-```r
-
+```{r, echo=FALSE}
 rm(list = ls())
+load("../../../data/raw/KIRC_survival.RData")
+```
+
+
+```r
+rm(list = ls())
+
 load("KIRC_survival.RData")
+```
+
+```{r}
 
 ### survival phenotype
 TCGA_survival_each <- TCGA_KIRC$TCGA.KIRC.survival.tsv
@@ -481,7 +498,7 @@ colnames(sample_information_decon) <- gsub("^[^_]*_[^_]*_[^_]*_sf_", "", colname
 
 ### Ground Truth
 
-```r
+```{r}
 ggplot(test_coordinate, aes(x = X, y = Y, color = sample_information_region)) +
   geom_point(size = 2) +
   scale_color_manual(
@@ -496,7 +513,7 @@ ggplot(test_coordinate, aes(x = X, y = Y, color = sample_information_region)) +
 
 ### Prediction result
 
-```r
+```{r}
 PhenoResult <- SpatialPhenoMap(
   bulk_decon = bulk_decon,
   bulk_pheno = bulk_pheno, 
@@ -513,20 +530,26 @@ PhenoResult <- SpatialPhenoMap(
 
 ### Hclust of low risk region
 
-```r
+```{r}
 PhenotypeHclust(PhenoResult, "phenotype-", test_coordinate, size = 1.5)
 ```
 
 
 ## Stage HCC
 
-
 ### load data 
+
+```{r, echo=FALSE}
+rm(list = ls())
+load("../../../data/raw/HCC_stage.RData")
+```
 
 ```r
 rm(list = ls())
 load("HCC_stage.RData")
+```
 
+```{r}
 #### common samples between stage phenotype and deconvolution
 common_sample <- intersect(names(sample_information_stage), row.names(LIHC_decon))
 LIHC_decon <- LIHC_decon[common_sample, ]
@@ -563,7 +586,7 @@ ggplot(test_coordinate, aes(x = X, y = Y, color = sample_information_region)) +
 
 ### Obtain prdiction result
 
-```r
+```{r}
 PhenoResult <- SpatialPhenoMap(
   bulk_decon = bulk_decon,
   bulk_pheno = bulk_pheno,
@@ -575,6 +598,53 @@ PhenoResult <- SpatialPhenoMap(
   n_perm = 1, 
   p = 0.001
 )
+```
+
+
+## ICB melanoma
+
+### load data 
+
+```{r, echo=FALSE}
+rm(list = ls())
+load("../../../data/raw/Melanoma_ICB.RData")
+```
+
+```r
+rm(list = ls())
+load("Melanoma_ICB.RData")
+```
+
+```{r}
+test_coordinate <- head(Melanoma_ST, length(Melanoma_ST$x))[, 4:5]
+colnames(test_coordinate) <- c("Y", "X")
+test_coordinate <- test_coordinate[, c("X", "Y")]
+
+bulk_decon <- bulk_decon
+bulk_pheno <- bulk_pheno
+family <- "binomial"
+
+coord <- test_coordinate
+resolution <- "spot"
+sample_information_decon <- Melanoma_ST_decon
+# sample_information_decon<-t(apply(sample_information_decon,1,function(x){x/sum(x)}))
+colnames(bulk_decon) <- gsub("^[^_]*_[^_]*_[^_]*_sf_", "", colnames(bulk_decon))
+colnames(sample_information_decon) <- gsub("^[^_]*_[^_]*_[^_]*_sf_", "", colnames(sample_information_decon))
+```
+
+### Obtain predicion results
+
+```{r}
+PhenoResult <- SpatialPhenoMap(
+  bulk_decon = bulk_decon, 
+  bulk_pheno = bulk_pheno, 
+  family = family, 
+  coord = test_coordinate, 
+  resolution = "spot", 
+  sample_information_decon = sample_information_decon, 
+  size = 5,
+  n_perm = 1,
+  p = 0.01)
 ```
 
 
