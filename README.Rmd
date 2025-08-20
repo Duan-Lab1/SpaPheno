@@ -86,6 +86,10 @@ The data required for the test are all listed in the following google cloud dire
 └── Simulation_STARmap.RData
 ```
 
+### Tutorial
+
+For more information and documentation, please visit the **[SpaPheno website](https://duan-lab1.github.io/SpaPheno/)**.
+
 ## :book: Vignette
 
 Using the following command and Choosing the `html` for more details.
