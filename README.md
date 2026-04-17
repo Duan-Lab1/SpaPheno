@@ -95,6 +95,190 @@ Data](https://drive.google.com/drive/folders/1tiSgMjhzvIsirvJwFDIAQIEIhR7qixUW?u
     ├── Simulation_osmFISH.RData
     └── Simulation_STARmap.RData
 
+In addition to the demonstration datasets above, we provide standardized
+pan-cancer bulk and single-cell reference resources to support
+cross-cohort and multi-omic applications of SpaPheno [SpaPheno
+TCGA-scRNARef-Dataset](https://drive.google.com/drive/folders/1g8Uj1bSprGMGG0Qitl5TMXVnEr6f3Ix0):
+
+| No. | TCGA Standard Cancer Type | Corresponding Single-Cell Data Original Naming |
+|:--:|:---|:---|
+| 1 | BLCA | BLCA |
+| 2 | BRCA | BRCA / Breast |
+| 3 | CESC | CESC |
+| 4 | CHOL | CHOL |
+| 5 | COAD | CRC |
+| 6 | ESCA | ESCA |
+| 7 | HNSC | HNSC / HNSCC / Oral |
+| 8 | KICH | KICH |
+| 9 | KIRC | KIRC |
+| 10 | LIHC | LIHC / Liver |
+| 11 | LUAD | LUAD |
+| 12 | LUSC | LSCC |
+| 13 | OV | OV / Ovary |
+| 14 | PAAD | PAAD |
+| 15 | PRAD | PRAD |
+| 16 | SKCM | SKCM |
+| 17 | STAD | STAD |
+| 18 | THCA | THCA |
+| 19 | UCEC | UCEC |
+| 20 | UVM | UVM |
+
+- **TCGA Pan-Cancer Bulk Expression and Clinical Data**:
+
+Processed RNA-seq gene expression profiles (raw counts) and
+corresponding clinical annotations (including survival outcomes, tumor
+stage) for **20 common cancer types** from The Cancer Genome Atlas
+(TCGA) are available. The included cancer types are listed in the table
+below, with unified gene symbols and standardized phenotype annotations
+to facilitate direct use with SpaPheno:
+
+    TCGA-n20PanCaner_Dataset
+    ├── TCGA-BLCA
+    │   ├── BLCA_summary.csv
+    │   ├── BLCA_expression_by_gene_name.tsv
+    │   ├── BLCA_expression.tsv
+    │   ├── BLCA_phenotype_with_survival.csv
+    │   └── BLCA_phenotype.csv
+    ├── TCGA-BRCA
+    ├── TCGA-CESC
+    ├── TCGA-CHOL
+    ├── TCGA-COAD
+    ├── TCGA-ESCA
+    ├── TCGA-HNSC
+    ├── TCGA-KICH
+    ├── TCGA-KIRC
+    ├── TCGA-LIHC
+    ├── TCGA-LUAD
+    ├── TCGA-LUSC
+    ├── TCGA-OV
+    ├── TCGA-PAAD
+    ├── TCGA-PRAD
+    ├── TCGA-SKCM
+    ├── TCGA-STAD
+    ├── TCGA-THCA
+    ├── TCGA-UCEC
+    └── TCGA-UVM
+
+- **TabulaTIME Single-Cell Reference Data**:
+
+Matched single-cell RNA-seq reference datasets for the above cancer
+types, derived from the TabulaTIME database, are provided as
+preprocessed `Seurat` objects. These datasets include cell type
+annotations, enabling direct integration with spatial transcriptomics
+data for cell type deconvolution and spatially resolved interpretation
+in SpaPheno.
+
+    TabulaTIME_scRNA_ref/
+    ├── TabulaTIME_reference_summary.csv
+    ├── BLCA_ref.rds
+    ├── BRCA_ref.rds
+    ├── CESC_ref.rds
+    ├── CHOL_ref.rds
+    ├── CRC-COAD_ref.rds
+    ├── ESCA_ref.rds
+    ├── HNSC_ref.rds
+    ├── KICH_ref.rds
+    ├── KIRC_ref.rds
+    ├── LIHC_ref.rds
+    ├── LSCC-LUSC_ref.rds
+    ├── LUAD_ref.rds
+    ├── OV_ref.rds
+    ├── PAAD_ref.rds
+    ├── PRAD_ref.rds
+    ├── SKCM_ref.rds
+    ├── STAD_ref.rds
+    ├── THCA_ref.rds
+    ├── UCEC_ref.rds
+    └── UVM_ref.rds
+
+### Deconvolution Strategy
+
+To enable consistent and comparable phenotype association analysis
+across data types, SpaPheno performs **cell-type deconvolution** on both
+bulk RNA-seq and spatial transcriptomics (ST) data using a shared
+single-cell RNA-seq reference dataset.
+
+In the current implementation, **cell2location** is used to estimate
+cell-type abundance profiles, ensuring that downstream phenotype
+modeling is built on unified, biologically interpretable features.
+
+> ### Parameter Selection for cell2location
+>
+> When performing deconvolution with cell2location, two key parameters
+> should be carefully adjusted based on the input data modality:
+>
+> #### 1. N_cells_per_location
+>
+> This parameter specifies the expected number of cells contributing to
+> each measured profile.
+>
+> - **Spatial transcriptomics (e.g., 10x Visium)**
+>
+>   Each spot captures a mixture of multiple cells.
+>
+>   A reasonable range is:
+>
+>   `N_cells_per_location = 10–30`
+>
+>   Default setting in SpaPheno:
+>
+>   `N_cells_per_location = 20`
+>
+> - **Bulk RNA-seq**
+>
+>   Each sample represents a large aggregate of cells.
+>
+>   Following cell2location recommendations, a moderate-to-large value
+>   is used:
+>
+>   `N_cells_per_location = 1–100`
+>
+>   Default setting in SpaPheno:
+>
+>   `N_cells_per_location = 100`
+>
+> #### 2. detection_alpha
+>
+> This parameter controls regularization strength for per-sample
+> normalization, accounting for technical variation in RNA detection
+> efficiency.
+>
+> - **Lower values (e.g., 20)**
+>
+>   → Stronger normalization and adaptation to technical noise
+>
+>   → More suitable for **spatial transcriptomics**, which typically
+>   exhibits higher technical heterogeneity
+>
+> - **Higher values (e.g., 200)**
+>
+>   → Weaker normalization, assuming more stable detection sensitivity
+>
+>   → More suitable for **bulk RNA-seq**, where technical variation is
+>   relatively modest
+>
+> Default settings used in SpaPheno:
+>
+> - Visium spatial transcriptomics: `detection_alpha = 20`
+> - Bulk RNA-seq: `detection_alpha = 200`
+>
+> ### Practical Recommendations
+>
+> Parameter choice should reflect both biological structure and
+> technical characteristics:
+>
+> - **Spot-based spatial data**
+>
+>   → Use relatively low `N_cells_per_location`
+>
+>   → Use moderate or low `detection_alpha`
+>
+> - **Bulk or bulk-like profiling data**
+>
+>   → Use higher `N_cells_per_location`
+>
+>   → Use higher `detection_alpha`
+
 ### Tutorial
 
 For more information and documentation, please visit the **[SpaPheno
@@ -120,10 +304,10 @@ Thanks all the developers of the methods integrated into **SpaPheno**.
 ## :eight_pointed_black_star: Citation
 
 Kindly cite by using `citation("SpaPheno")` if you think **SpaPheno**
-helps you. Alternative way is Bin Duan (2025). *SpaPheno: Linking
-Spatial Transcriptomics to Clinical Phenotypes with Interpretable
-Machine Learning*. R package version 0.0.1,
-\<URL:<https://github.com/Duan-Lab1/SpaPheno>\>.
+helps you. Alternative way is **Duan, B., Cheng, X. & Zou, H. SpaPheno:
+linking spatial transcriptomics to clinical phenotypes with
+interpretable machine learning. Genome Med (2026).
+<https://doi.org/10.1186/s13073-026-01645-7>**
 
 ## :writing_hand: Authors
 

@@ -1,0 +1,42 @@
+citHeader("To cite the SpaPheno package in publications, please use both the package and the corresponding article:")
+
+citEntry(
+  entry    = "Article",
+  title    = "SpaPheno: linking spatial transcriptomics to clinical phenotypes with interpretable machine learning",
+  author   = personList(
+    as.person("Bin Duan"),
+    as.person("Xiaojie Cheng"),
+    as.person("Hua Zou")
+  ),
+  journal  = "Genome Medicine",
+  year     = "2026",
+  volume   = NA,
+  number   = NA,
+  pages    = "Article number: 45",
+  doi      = "10.1186/s13073-026-01645-7",
+  url      = "https://link.springer.com/article/10.1186/s13073-026-01645-7",
+  textVersion = paste(
+    "Duan B, Cheng X, Zou H (2026).",
+    "SpaPheno: linking spatial transcriptomics to clinical phenotypes with interpretable machine learning.",
+    "Genome Medicine, Article number: 45.",
+    "https://doi.org/10.1186/s13073-026-01645-7"
+  )
+)
+
+citEntry(
+  entry    = "Manual",
+  title    = "SpaPheno: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning",
+  author   = personList(
+    as.person("Bin Duan"),
+    as.person("Hua Zou")
+  ),
+  year     = "2026",
+  note     = "R package version 0.0.2",
+  url      = "https://github.com/Duan-Lab1/SpaPheno",
+  textVersion = paste(
+    "Duan B, Zou H (2026).",
+    "SpaPheno: Linking Spatial Transcriptomics to Clinical Phenotypes with Interpretable Machine Learning.",
+    "R package version 0.0.2.",
+    "https://github.com/Duan-Lab1/SpaPheno"
+  )
+)
