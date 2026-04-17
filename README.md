@@ -119,11 +119,7 @@ Thanks all the developers of the methods integrated into **SpaPheno**.
 
 ## :eight_pointed_black_star: Citation
 
-Kindly cite by using `citation("SpaPheno")` if you think **SpaPheno**
-helps you. Alternative way is Bin Duan (2025). *SpaPheno: Linking
-Spatial Transcriptomics to Clinical Phenotypes with Interpretable
-Machine Learning*. R package version 0.0.1,
-\<URL:<https://github.com/Duan-Lab1/SpaPheno>\>.
+Duan, B., Cheng, X. & Zou, H. SpaPheno: linking spatial transcriptomics to clinical phenotypes with interpretable machine learning. Genome Med (2026). https://doi.org/10.1186/s13073-026-01645-7
 
 ## :writing_hand: Authors
 
